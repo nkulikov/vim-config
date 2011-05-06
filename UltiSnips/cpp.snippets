@@ -1,0 +1,72 @@
+snippet header "Generic Artec C/C++ header" !b
+/********************************************************************
+*   Project     ${1:Artec Scanner SDK}
+*   Copyright:  Artec Inc.
+********************************************************************/
+
+#ifndef _ARTEC_${2:MODULE_FILENAME}_H_
+#define _ARTEC_$2_H_
+
+#endif // _ARTEC_$2_H_
+endsnippet
+
+snippet headerbroadway "Broadway 3D Artec C/C++ header" !b
+/********************************************************************
+*   Project     Broadway 3D
+*   Copyright:  Artec Inc.
+********************************************************************/
+
+#ifndef _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
+#define _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
+
+namespace Artec
+{
+namespace BroadwaySoftware
+{
+namespace ${1:ModuleName}
+{
+
+
+
+} // $1
+} // BroadwaySoftware
+} // Artec
+
+#endif // _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
+endsnippet
+
+snippet cldec "Generic Artec class declaration" !b
+// requires:
+//#include <stdexcept>
+//#include <boost/scoped_ptr.hpp>
+
+class ${1:ClassName}
+{
+ public:
+
+	/// Base error class. Should not be directly used for
+	/// signaling an error. This class proposed for inheritance.
+	struct BaseError : std::runtime_error
+	{
+		BaseError(std::string const & m) throw () :
+			runtime_error(m)
+		{ }
+	};
+
+
+
+ private:
+
+	struct Impl;
+	boost::scoped_ptr<Impl> impl;
+};
+endsnippet
+
+snippet errdecl "Generic Artec class error declaration" !
+struct ${1:New}Error : BaseError
+{
+	$1Error(std::string const & m) :
+		BaseError(m)
+	{ }
+};
+endsnippet

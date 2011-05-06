@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='scp://builder@jenkins-alt-p6.artec-local/home/builder/new-file/'
+let g:netrw_dirhist_2='scp://builder@jenkins-alt-p6.artec-local/home/builder/'
+let g:netrw_dirhist_3='scp://builder@jenkins-alt-p6.artec-local/'
+let g:netrw_dirhist_4='scp://builder@jenkins-alt-p6.artec-local/nkulikov/'
+let g:netrw_dirhist_5='scp://builder@jenkins-alt-p6.artec-local/nkulikov/pkg-broadway-3d/'
+let g:netrw_dirhist_6='scp://lostar@nkulikov-ws.artec-local/'
+let g:netrw_dirhist_7='scp://lostar@nkulikov-ws.artec-local/.vim/'
+let g:netrw_dirhist_8='scp://lostar@nkulikov-ws.artec-local/.vim/bundle/'
+let g:netrw_dirhist_9='scp://lostar@nkulikov-ws.artec-local/.vim/bundle/ag.vim/'
