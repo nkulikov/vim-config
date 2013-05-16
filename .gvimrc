@@ -222,6 +222,12 @@ else " console UI settings
   endif
 endif
 
+" The minimal number of columns to scroll horizontally.
+set sidescroll=1
+
+" Line continuation markers used when wrap is off
+set listchars+=precedes:◀,extends:►
+
 " Set scons as build tool
 set makeprg=scons
 
