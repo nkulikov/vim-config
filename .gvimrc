@@ -334,57 +334,57 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " Keymapping. {{{
 
 " Workaround for unpleasant mapping established by a plugin
-map <F1>    <nop>
-map <F2>    <nop>
-map <F3>    <nop>
-map <F4>    <nop>
-map <F5>    <nop>
-map <F6>    <nop>
+noremap <F1>    <nop>
+noremap <F2>    <nop>
+noremap <F3>    <nop>
+noremap <F4>    <nop>
+noremap <F5>    <nop>
+noremap <F6>    <nop>
 
-map <F7>    :make! -Q -s -j 4<CR>
-map <C-F7>  :make!<CR>
+noremap <F7>    :make! -Q -s -j 4<CR>
+noremap <C-F7>  :make!<CR>
 
 " manual cleanup trailing spaces and tab in current buffer
-map <F8>    :%s/\s\+$//e<CR>
+noremap <F8>    :%s/\s\+$//e<CR>
 
-map <F10>   :silent! !ctags
+noremap <F10>   :silent! !ctags
   \ -R --c++-kinds=+p --fields=+iaS --extra=+q .
   \ --exclude='.git' --exclude='.release' --exclude='.debug' &<CR>
 
 " Manual refresh YouCompileMe diagnostics
-map <F11>   :YcmForceCompileAndDiagnostics<CR>
+noremap <F11>   :YcmForceCompileAndDiagnostics<CR>
 
 " Map solarized dark/ligth switch
-map <F12>   :call ToggleBackgroundSafely()<CR>
+noremap <F12>   :call ToggleBackgroundSafely()<CR>
 
 let mapleader = ","
 let maplocalleader = "\\"
 
 " Toggle NERDTree window
-map <Leader>f    :NERDTreeToggle<CR>
+noremap <Leader>f    :NERDTreeToggle<CR>
 
 " Toggle Tagbar window
-map <Leader>t    :TagbarToggle<CR>
+noremap <Leader>t    :TagbarToggle<CR>
 
 " Grep word under cursor
-map <Leader>g    :exec("Ag -sw ".expand("<cword>"))<CR>
+noremap <Leader>g    :exec("Ag -sw ".expand("<cword>"))<CR>
 
 " Switch between declaration and definition of symbol
-map <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+noremap <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Toggle quickfix/location lists
-map <Leader>q  :call ToggleList("Quickfix List", 'c')<CR>
-map <Leader>l  :call ToggleList("Location List", 'l')<CR>
+noremap <Leader>q  :call ToggleList("Quickfix List", 'c')<CR>
+noremap <Leader>l  :call ToggleList("Location List", 'l')<CR>
 
 " Quick switching (Ctrl + h/j/k/l) between splits
-map <C-h>   :wincmd h<CR>
-map <C-j>   :wincmd j<CR>
-map <C-k>   :wincmd k<CR>
-map <C-l>   :wincmd l<CR>
+noremap <C-h>   :wincmd h<CR>
+noremap <C-j>   :wincmd j<CR>
+noremap <C-k>   :wincmd k<CR>
+noremap <C-l>   :wincmd l<CR>
 
 " Quick switching (Shift/Ctrl + Tab) between tabs
-map <S-TAB> :tabn<CR>
-map <C-T>   :tabe<CR>
+noremap <S-TAB> :tabn<CR>
+noremap <C-T>   :tabe<CR>
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
