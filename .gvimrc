@@ -414,6 +414,11 @@ nnoremap } }zz
 nnoremap j gj
 nnoremap k gk
 
+" emulate ESC via jk and disable all alternative mappings
+inoremap jk <esc>
+inoremap <esc> <nop>
+inoremap <C-[> <nop>
+
 "}}}
 
 " Setup Syntastic. {{{
