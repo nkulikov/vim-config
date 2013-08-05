@@ -134,6 +134,7 @@ set synmaxcol=800
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
+" Q: Is it really needed?
 set notimeout
 set ttimeout
 set ttimeoutlen=10
@@ -332,6 +333,11 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " }}}
 
 " Keymapping. {{{
+
+" CAUTION:
+"  - In general, when you create a mapping that only applies to specific
+"    buffers you should use <localleader> instead of <leader>. Using two
+"    separate leader keys provides a sort of "namespacing".
 
 " Workaround for unpleasant mapping established by a plugin
 noremap <F1>    <nop>
