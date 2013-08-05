@@ -518,10 +518,8 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_global_extra_conf.py'
 " }}}
 " Setup UltiSnips. {{{
 
-" Remap UltiSnips default keybinding because they conflict with YCM
-let g:UltiSnipsExpandTrigger = "<C-d>"
-let g:UltiSnipsJumpForwardTrigger = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+" Expand selected snip
+let g:UltiSnipsExpandTrigger = "<C-s>"
 
 " Open snip editor in vertical split
 let g:UltiSnipsEditSplit = "vertical"
