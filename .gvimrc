@@ -414,10 +414,13 @@ nnoremap } }zz
 nnoremap j gj
 nnoremap k gk
 
-" emulate ESC via jk and disable all alternative mappings
+" Emulate ESC via jk and disable all alternative mappings
 inoremap jk <esc>
 inoremap <esc> <nop>
 inoremap <C-[> <nop>
+
+" Open help in vertical (instead of horizontal) split
+cnoremap help vert help
 
 "}}}
 
