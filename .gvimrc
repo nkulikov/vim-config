@@ -514,6 +514,7 @@ let g:solarized_diffmode = "high"
 " Make Syntastic & YCM more responsive
 set updatetime=500 " ms
 let g:ycm_allow_changing_updatetime = 0
+let g:ycm_confirm_extra_conf = 0
 
 " Fallback if no project specific YCM configuration is found.
 let g:ycm_global_ycm_extra_conf = '~/.ycm_global_extra_conf.py'
