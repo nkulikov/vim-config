@@ -261,7 +261,7 @@ set wildignore+=*.orig                           " Merge resolution files
 " * Use a popup menu so show the possible completion.
 " * Use the popup menu also when there is only one match.
 " * Only insert the longest common text of the matches.
-set completeopt=menu,menuone,longest
+set completeopt=menu,menuone,longest,preview
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
@@ -567,5 +567,12 @@ if has("cscope")
     " find functions that function under cursor calls
     nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
+
+" }}}
+" Setup jedi-vim. {{{
+
+" Disable autocomplete because it it YCM duty. This plugin used only for
+" displaying documentation (keymap: K) and params expansion for Python.
+let g:jedi#completions_enabled = 0
 
 " }}}
