@@ -20,7 +20,7 @@ function! ToggleBackgroundSafely()
   let &background = (&background == "dark"? "light" : "dark")
   colorscheme solarized
   call s:setupColors()
-  call s:setupSyntasticColors()
+  call s:setupYcmColors()
 endfun
 
 function! s:setupColors()
@@ -101,7 +101,7 @@ set statusline+=%<%f%h%m%r\
 set statusline+=[%{strlen(&ft)?&ft:'none'},
 set statusline+=%{strlen(&fenc)?&fenc:&enc},
 set statusline+=%{&fileformat}]%=
-set statusline+=%{SyntasticStatuslineFlag()}\ 
+"set statusline+=%{SyntasticStatuslineFlag()}\ 
 set statusline+=⍖\ %l/%L,\ ⍆\ %c,\ '0x%04B'\ 
 
 " Setup cursor style
@@ -424,44 +424,44 @@ cnoremap help vert help
 
 "}}}
 
-" Setup Syntastic. {{{
-
-"let g:syntastic_debug = 1
-
-" Syntastic status line like [✗✗ 5, ≫≫ 10]
-let g:syntastic_stl_format = '[%E{✗✗ %e}%B{, }%W{≫≫ %w}]'
-
-" Change default mark symbol (>>) to new one
-let g:syntastic_error_symbol = "✗✗"
-let g:syntastic_warning_symbol = "≫≫"
-let g:syntastic_style_error_symbol = "⋆⋆"
-let g:syntastic_style_warning_symbol = "⋆⋆"
-
-function! s:setupSyntasticColors()
-  " Sigh mark colors
-  " TODO: remove color hardcode and use solarized color name
-  if &background == "dark"
-    highlight SyntasticErrorSign         ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
-    highlight SyntasticWarningSign       ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
-    highlight SyntasticStyleErrorSign    ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
-    highlight SyntasticStyleWarningSign  ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
-  else
-    highlight SyntasticErrorSign         ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
-    highlight SyntasticWarningSign       ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
-    highlight SyntasticStyleErrorSign    ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
-    highlight SyntasticStyleWarningSign  ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
-  endif
-endfun
-
-call s:setupSyntasticColors()
-
-" Check buffer when open/save
-let g:syntastic_check_on_open=1
-
-" Populate location list with warnings/errors
-let g:syntastic_always_populate_loc_list = 1
-
-" }}}
+"" Setup Syntastic. {{{
+"
+""let g:syntastic_debug = 1
+"
+"" Syntastic status line like [✗✗ 5, ≫≫ 10]
+"let g:syntastic_stl_format = '[%E{✗✗ %e}%B{, }%W{≫≫ %w}]'
+"
+"" Change default mark symbol (>>) to new one
+"let g:syntastic_error_symbol = "✗✗"
+"let g:syntastic_warning_symbol = "≫≫"
+"let g:syntastic_style_error_symbol = "⋆⋆"
+"let g:syntastic_style_warning_symbol = "⋆⋆"
+"
+"function! s:setupSyntasticColors()
+"  " Sigh mark colors
+"  " TODO: remove color hardcode and use solarized color name
+"  if &background == "dark"
+"    highlight SyntasticErrorSign         ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
+"    highlight SyntasticWarningSign       ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
+"    highlight SyntasticStyleErrorSign    ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
+"    highlight SyntasticStyleWarningSign  ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
+"  else
+"    highlight SyntasticErrorSign         ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
+"    highlight SyntasticWarningSign       ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
+"    highlight SyntasticStyleErrorSign    ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
+"    highlight SyntasticStyleWarningSign  ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
+"  endif
+"endfun
+"
+"call s:setupSyntasticColors()
+"
+"" Check buffer when open/save
+"let g:syntastic_check_on_open=1
+"
+"" Populate location list with warnings/errors
+"let g:syntastic_always_populate_loc_list = 1
+"
+"" }}}
 " Setup netrw. {{{
 
 let g:netrw_altv = 1
