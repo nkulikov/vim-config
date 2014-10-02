@@ -25,6 +25,7 @@ endfun
 
 function! s:setupColors()
   " Corrections for solarized theme
+  highlight MatchParen ctermbg=none guibg=red
   if &background == "dark"
     highlight Cursor                                        guibg=fg
     highlight CursorLine  ctermbg=233                       guibg=#171717
