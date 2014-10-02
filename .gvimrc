@@ -417,8 +417,9 @@ nnoremap } }zz
 nnoremap j gj
 nnoremap k gk
 
-" Emulate ESC via jk and disable all alternative mappings
+" Emulate ESC via jk/kj and disable all alternative mappings
 inoremap jk <esc>
+inoremap kj <esc>
 inoremap <esc> <nop>
 inoremap <C-[> <nop>
 
