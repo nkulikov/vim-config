@@ -468,7 +468,7 @@ cnoremap help vert help
 " Setup netrw. {{{
 
 let g:netrw_altv = 1
-let g:netrw_fastbrowse = 2
+let g:netrw_fastbrowse = 0
 let g:netrw_keepdir = 0
 let g:netrw_liststyle = 0
 let g:netrw_retmap = 1
