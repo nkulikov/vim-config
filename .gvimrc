@@ -289,21 +289,26 @@ autocmd BufRead,BufNewFile *.tpl set filetype=smarty
 autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 
 " Text formatting
-autocmd FileType ruby,python
-  \ setlocal expandtab shiftwidth=2 softtabstop=2 nowrap
+autocmd FileType ruby,python,php
+  \ setlocal expandtab shiftwidth=4 softtabstop=4 nowrap
   \ smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cla
 autocmd FileType eruby,yaml,javascript
   \ setlocal expandtab shiftwidth=2 softtabstop=2 nowrap
 autocmd BufNewFile,BufReadPre .vimrc,.gvimrc
   \ setlocal expandtab shiftwidth=2 softtabstop=2 nowrap
+"autocmd FileType cpp
+"  \ setlocal noexpandtab shiftwidth=4 softtabstop=0 tabstop=4 nowrap
+"  \ cindent cinoptions="(1s,u1s,U0,l1,g1,h-1" matchpairs="(:),{:},[:],<:>"
+" Switch tab -> spaces
 autocmd FileType cpp
-  \ setlocal noexpandtab shiftwidth=4 softtabstop=0 tabstop=4 nowrap
-  \ cindent cinoptions="(1s,u1s,U0,l1,g1,h-1" matchpairs="(:),{:},[:],<:>"
+  \ setlocal expandtab shiftwidth=4 softtabstop=0 tabstop=4 nowrap
+  \ cindent cinoptions=(1s,u1s,U0,l1,g1,h-1 matchpairs=(:),{:},[:],<:>
 autocmd FileType sh,vim,snippets
   \ setlocal noexpandtab tabstop=8 nowrap
 
-" Enable spell checker
+" Enable spell checker everywhere except help
 autocmd BufNewFile,BufReadPre,BufNew * call s:enableSpellChecker()
+autocmd FileType help setlocal nospell
 
 " Highlighting trailing columns in lines longer than 80 columns.
 autocmd FileType cpp,ruby,eruby,python,yaml,javascript,sh,gitcommit
@@ -361,7 +366,7 @@ noremap <F10>   :silent! !ctags
   \ --exclude='.git' --exclude='.release' --exclude='.debug' &<CR>
 
 " Manual refresh YouCompileMe diagnostics
-noremap <F11>   :YcmForceCompileAndDiagnostics<CR>
+"noremap <F11>   :YcmForceCompileAndDiagnostics<CR>
 
 " Map solarized dark/ligth switch
 noremap <F12>   :call ToggleBackgroundSafely()<CR>
@@ -370,7 +375,7 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " Toggle NERDTree window
-noremap <Leader>f    :NERDTreeToggle<CR>
+"noremap <Leader>f    :NERDTreeToggle<CR>
 
 " Toggle Tagbar window
 noremap <Leader>t    :TagbarToggle<CR>
@@ -379,7 +384,7 @@ noremap <Leader>t    :TagbarToggle<CR>
 noremap <Leader>g    :exec("Ag -sw ".expand("<cword>"))<CR>
 
 " Switch between declaration and definition of symbol
-noremap <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"noremap <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Toggle quickfix/location lists
 noremap <Leader>q  :call ToggleList("Quickfix List", 'c')<CR>
@@ -392,8 +397,8 @@ noremap <C-k>   :wincmd k<CR>
 noremap <C-l>   :wincmd l<CR>
 
 " Quick switching (Shift/Ctrl + Tab) between tabs
-noremap <S-TAB> :tabn<CR>
-noremap <C-T>   :tabe<CR>
+"noremap <S-TAB> :tabn<CR>
+"noremap <C-T>   :tabe<CR>
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
@@ -418,7 +423,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Emulate ESC via jk/kj and disable all alternative mappings
-inoremap jk <esc>
+"inoremap jk <esc>
 inoremap kj <esc>
 inoremap <esc> <nop>
 inoremap <C-[> <nop>
@@ -428,7 +433,7 @@ cnoremap help vert help
 
 "}}}
 
-"" Setup Syntastic. {{{
+" Setup Syntastic (DISABLED). {{{
 "
 ""let g:syntastic_debug = 1
 "
@@ -465,16 +470,17 @@ cnoremap help vert help
 "" Populate location list with warnings/errors
 "let g:syntastic_always_populate_loc_list = 1
 "
-"" }}}
-" Setup netrw. {{{
+" }}}
+" Setup netrw (DISABLED). {{{
 
-let g:netrw_altv = 1
-let g:netrw_fastbrowse = 0
-let g:netrw_keepdir = 0
-let g:netrw_liststyle = 0
-let g:netrw_retmap = 1
-let g:netrw_silent = 1
-let g:netrw_special_syntax = 1
+"let g:netrw_altv = 1
+"let g:netrw_fastbrowse = 0
+"let g:netrw_keepdir = 0
+"let g:netrw_list_hide= '\(^\|\s\s\)\zs\.\S\+'
+"let g:netrw_liststyle = 0
+"let g:netrw_retmap = 1
+"let g:netrw_silent = 1
+"let g:netrw_special_syntax = 1
 
 " }}}
 " Setup Ag (https://github.com/ggreer/the_silver_searcher). {{{
@@ -513,27 +519,45 @@ let g:solarized_bold = 0
 let g:solarized_diffmode = "high"
 
 " }}}
-" Setup YouCompleteMe. {{{
-
-" Make Syntastic & YCM more responsive
-set updatetime=500 " ms
-let g:ycm_allow_changing_updatetime = 0
-let g:ycm_confirm_extra_conf = 0
-
-" Fallback if no project specific YCM configuration is found.
-let g:ycm_global_ycm_extra_conf = '~/.ycm_global_extra_conf.py'
-
+" Setup YouCompleteMe (DISABLED). {{{
+"
+"" Make Syntastic & YCM more responsive
+"set updatetime=500 " ms
+"let g:ycm_allow_changing_updatetime = 0
+"let g:ycm_confirm_extra_conf = 0
+"
+"" Fallback if no project specific YCM configuration is found.
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_global_extra_conf.py'
+"
+"function! s:setupYcmColors()
+"  " Sigh mark colors
+"  " TODO: remove color hardcode and use solarized color name
+"  if &background == "dark"
+"    highlight YcmErrorSign         ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
+"    highlight YcmWarningSign       ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
+""    highlight SyntasticStyleErrorSign    ctermbg=Black  ctermfg=DarkRed      guibg=#073642  guifg=red
+""    highlight SyntasticStyleWarningSign  ctermbg=Black  ctermfg=DarkYellow   guibg=#073642  guifg=orange
+"  else
+"    highlight YcmErrorSign         ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
+"    highlight YcmWarningSign       ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
+""    highlight SyntasticStyleErrorSign    ctermbg=LightGray  ctermfg=DarkRed     guibg=#eee8d5  guifg=red
+""    highlight SyntasticStyleWarningSign  ctermbg=LightGray  ctermfg=DarkYellow  guibg=#eee8d5  guifg=orange
+"  endif
+"endfun
+"
+"call s:setupYcmColors()
+"
 " }}}
 " Setup UltiSnips. {{{
 
 " Expand selected snip
-let g:UltiSnipsExpandTrigger = "<C-s>"
+let g:UltiSnipsExpandTrigger = "<tab>"
 
 " Open snip editor in vertical split
 let g:UltiSnipsEditSplit = "vertical"
 
 " }}}
-" CScope setup. {{{
+" Setup CScope. {{{
 
 if has("cscope")
 
@@ -573,10 +597,145 @@ if has("cscope")
 endif
 
 " }}}
-" Setup jedi-vim. {{{
+" Setup jedi-vim (DISABLED). {{{
+"
+"" Disable autocomplete because it it YCM duty. This plugin used only for
+"" displaying documentation (keymap: K) and params expansion for Python.
+"let g:jedi#completions_enabled = 1
+"
+" }}}
+" Setup python-mode. {{{
 
-" Disable autocomplete because it it YCM duty. This plugin used only for
-" displaying documentation (keymap: K) and params expansion for Python.
-let g:jedi#completions_enabled = 0
+let g:pymode_virtualenv = 1
+let g:pymode_folding = 0
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_lint_error_symbol = '✗✗'
 
 " }}}
+" Setup unite.vim {{{
+
+let g:unite_data_directory='~/.vim/.cache/unite'
+
+" Fuzzy match by default
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+" Fuzzy matching for plugins not using matcher_default as filter
+call unite#custom#source('outline,line,grep,session', 'matchers', ['matcher_fuzzy'])
+
+let g:unite_source_rec_max_cache_files = 0
+call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 0)
+
+" Keep track of yanks
+let g:unite_source_history_yank_enable = 1
+
+" Prettier prompt
+call unite#custom#profile('default', 'context', {
+  \ 'prompt': '» ',
+  \ 'start_insert': 1,
+  \ 'marked_icon': '✓',
+  \ 'update_time': 200,
+  \ 'cursor_line_highlight': 'UniteSelectedLine',
+  \ 'direction': 'botright',
+  \ 'prompt_direction': 'top',
+  \ })
+
+" Autosave sessions for unite-sessions
+let g:unite_source_session_enable_auto_save = 1
+
+" Non-ugly colors for selected item, requires you to set 'hi UnitedSelectedLine'
+let g:unite_cursor_line_highlight = "UniteSelectedLine"
+
+" Set to some better time formats
+let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
+let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
+
+" Use ag or ack as grep command if possible
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-case --ignore tags'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts =
+              \ '--no-heading --no-color -a -H'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+let g:unite_source_codesearch_ignore_case = 1
+
+function! g:DoUniteFuzzy()
+    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_rank')
+    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_fuzzy')
+    exec "Unite -buffer-name=files file_rec/async file/new"
+endfunction
+function! g:DoUniteNonFuzzy()
+    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_nothing')
+    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_glob')
+    exec "Unite -buffer-name=files file_rec/async file/new"
+endfunction
+function! g:DoUniteFuzzyQuickfix()
+    call unite#custom#source('quickfix', 'sorters', 'sorter_rank')
+    call unite#custom#source('quickfix', 'matchers', 'matcher_fuzzy')
+    exec "Unite -buffer-name=quickfix quickfix"
+endfunction
+function! g:DoUniteNonFuzzyQuickfix()
+    call unite#custom#source('quickfix', 'sorters', 'sorter_nothing')
+    call unite#custom#source('quickfix', 'matchers', 'matcher_glob')
+    exec "Unite -buffer-name=quickfix quickfix"
+endfunction
+function! UltiSnipsCallUnite()
+    Unite -immediately -no-empty -vertical -buffer-name=ultisnips ultisnips
+    return ''
+endfunction
+
+inoremap <silent><leader>l<tab> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+nnoremap <silent><leader>l<tab> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+nnoremap <silent><leader>lr :call g:DoUniteFuzzy()<CR>
+nnoremap <silent><leader>lR :call g:DoUniteNonFuzzy()<CR>
+nnoremap <silent><leader>lq :call g:DoUniteFuzzyQuickfix()<CR>
+nnoremap <silent><leader>lQ :call g:DoUniteNonFuzzyQuickfix()<CR>
+nnoremap <silent><leader>le :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
+nnoremap <silent><leader>lE :<C-u>Unite -buffer-name=files file_mru bookmark file_rec/async file/new<CR>
+nnoremap <silent><leader>lB :<C-u>Unite -buffer-name=buffers buffer<CR>
+nnoremap <silent><leader>lb :<C-u>Unite -buffer-name=buffers buffer_tab<CR>
+nnoremap <silent><leader>ly :<C-u>Unite -buffer-name=yanks history/yank<CR>
+nnoremap <silent><leader>lc :<C-u>Unite -buffer-name=changes change<CR>
+nnoremap <silent><leader>lj :<C-u>Unite -buffer-name=jumps jump<CR>
+nnoremap <silent><leader>lf :<C-u>Unite -buffer-name=jumps jump<CR>
+nnoremap <silent><leader>l; :<C-u>Unite -buffer-name=commands history/command<CR>
+nnoremap <silent><leader>l/ :<C-u>Unite -buffer-name=commands history/search<CR>
+nnoremap <silent><leader>lo :<C-u>Unite -buffer-name=outline outline<CR>
+nnoremap <silent><leader>la :<C-u>Unite -buffer-name=outline -vertical outline<CR>
+nnoremap <silent><leader>ll :<C-u>Unite -buffer-name=line line<CR>
+nnoremap <silent><leader>lw :<C-u>Unite -buffer-name=location_list location_list<CR>
+nnoremap <silent><leader>l* :<C-u>UniteWithCursorWord -buffer-name=line line<CR>
+nnoremap <silent><leader>lg :<C-u>Unite -buffer-name=grep grep<CR>
+nnoremap <silent><leader>lG "zyiw:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+vnoremap <silent><leader>lG "zy:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+nnoremap <silent><leader>ls :<C-u>Unite session<CR>
+nnoremap <silent><leader>lt :<C-u>Unite -buffer-name=tags tag<CR>
+nnoremap <silent><leader>lT :<C-u>Unite -buffer-name=tagfiles tag/file<CR>
+nnoremap <silent><leader>li :<C-u>Unite -buffer-name=autotags tag/include<CR>
+nnoremap <silent><leader>ld :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru directory<CR>
+nnoremap <silent><leader>l, :<C-u>UniteResume<CR>
+nnoremap <silent><leader>lv :<C-u>UniteResume<CR>
+nnoremap <silent><leader>lV :<C-u>UniteResume
+
+nnoremap <leader>lS :<C-u>UniteSessionSave
+
+" }}}
+
+"set foldmethod=syntax
+"set foldlevelstart=1
+
+let xml_syntax_folding=1      " XML
+
+" test mode
+set sessionoptions=folds,localoptions,sesdir
+
+" apply per-project configuration
+set secure
+set exrc

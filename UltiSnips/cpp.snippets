@@ -1,13 +1,30 @@
-snippet header "Generic Artec C/C++ header" !b
+snippet guard "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import random, string
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+	snip.rv = ('%s_%s' % (name,rand)).upper()
+else:
+    snip.rv = snip.c`}
+#define $1
+
+${0}
+
+#endif /* end of include guard: $1 */
+
+endsnippet
+
+snippet header "Generic header" !b
 /********************************************************************
-*   Project     ${1:Artec Scanner SDK}
-*   Copyright:  Artec Inc.
+*   Project     ${1:Project}
+*   Copyright:
 ********************************************************************/
 
-#ifndef _ARTEC_${2:MODULE_FILENAME}_H_
-#define _ARTEC_$2_H_
+#ifndef _${2:MODULE_FILENAME}_H_
+#define _$2_H_
 
-#endif // _ARTEC_$2_H_
+#endif // _$2_H_
 endsnippet
 
 snippet headerbroadway "Broadway 3D Artec C/C++ header" !b
