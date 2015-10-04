@@ -650,17 +650,14 @@ let g:unite_cursor_line_highlight = "UniteSelectedLine"
 let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
 let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
 
-" Use ag or ack as grep command if possible
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-case --ignore tags'
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts =
-              \ '--no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
-endif
+" Use ag
+let g:unite_source_file_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+let g:unite_source_rec_async_command =
+  \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+  \'--nocolor --nogroup --hidden --ignore-case'
+let g:unite_source_grep_recursive_opt = ''
 
 let g:unite_source_codesearch_ignore_case = 1
 
