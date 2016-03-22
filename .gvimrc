@@ -724,6 +724,9 @@ nnoremap <silent><leader>lV :<C-u>UniteResume
 nnoremap <leader>lS :<C-u>UniteSessionSave
 
 " }}}
+" Setup vitality {{{
+let g:vitality_fix_focus=0
+" }}}
 
 "set foldmethod=syntax
 "set foldlevelstart=1
