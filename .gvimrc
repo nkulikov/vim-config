@@ -185,11 +185,7 @@ colorscheme solarized
 call s:setupColors()
 
 if has('gui_running')
-  if has("gui_macvim")
-    set guifont=PragmataPro:h15
-  else
-    set guifont=Inconsolata:h16
-  endif
+  set guifont=Fira\ Mona:h14
 
   " Unprintable characters mapping
   set listchars=eol:¬,extends:»,precedes:◂,tab:▸\ ,trail:·
