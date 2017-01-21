@@ -568,6 +568,9 @@ let g:UltiSnipsEditSplit = "vertical"
 
 if has("cscope")
 
+    " try to add the database from current dir
+    cscope add cscope.out
+
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
 
