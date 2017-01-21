@@ -285,6 +285,16 @@ autocmd BufRead,BufNewFile *.tpl set filetype=smarty
 autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 
 " Text formatting
+
+" treat new file with unspecified type as plain text
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+
+" plain text formatting
+" (a) autoformating of paragraphs and (w) trailing whitespace for paragraph
+" continuation on next line
+autocmd FileType text
+  \ setlocal formatoptions+=aw
+
 autocmd FileType ruby,python,php
   \ setlocal expandtab shiftwidth=4 softtabstop=4 nowrap
   \ smartindent cinwords=if,elif,else,for,while,try,except,finally,def,cla
