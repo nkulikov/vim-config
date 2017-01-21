@@ -39,7 +39,7 @@ function! s:setupColors()
   highlight Cursor                                          guibg=fg
 
   if !has("gui")
-    highlight SpecialKey    ctermbg=bg           ctermfg=238
+    highlight SpecialKey  ctermbg=None                      ctermfg=238
   endif
 endfun
 
