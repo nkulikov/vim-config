@@ -574,6 +574,9 @@ if has("cscope")
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
 
+    " be more verbosive when add new database
+    set cscopeverbose
+
     " check cscope for definition of a symbol before checking ctags: set to 1
     " if you want the reverse search order.
     set csto=0
