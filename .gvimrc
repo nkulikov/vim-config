@@ -38,8 +38,10 @@ function! s:setupColors()
 
   highlight Cursor                                          guibg=fg
 
-  if !has("gui")
-    highlight SpecialKey  ctermbg=None                      ctermfg=238
+  if !has("gui_running")
+    " 15-th color from palette has to be reserved in iTerm profile and
+    " have color value slightly different from background
+    highlight SpecialKey  ctermbg=None                      ctermfg=15
   endif
 endfun
 
