@@ -740,6 +740,12 @@ nnoremap <leader>lS :<C-u>UniteSessionSave
 " Setup vitality {{{
 let g:vitality_fix_focus=0
 " }}}
+" Setup lvimrc {{{
+
+" don't ask before loading a vimrc file
+let g:localvimrc_ask=0
+
+" }}}
 
 "set foldmethod=syntax
 "set foldlevelstart=1
