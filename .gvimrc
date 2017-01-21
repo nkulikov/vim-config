@@ -398,6 +398,7 @@ noremap <Leader>l  :call ToggleList("Location List", 'l')<CR>
 
 " Quick switching (Ctrl + h/j/k/l) between splits
 noremap <C-h>   :wincmd h<CR>
+noremap <BS>    :wincmd h<CR>
 noremap <C-j>   :wincmd j<CR>
 noremap <C-k>   :wincmd k<CR>
 noremap <C-l>   :wincmd l<CR>
