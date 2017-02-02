@@ -8,6 +8,10 @@ function! s:isMac()
   return has("mac") && count(split(system("uname"), '\n'), 'Darwin')
 endfunction
 
+function! s:is24bitTerm()
+  return $TERM_PROGRAM == 'iTerm.app'
+endfunction
+
 function! s:enableSpellChecker()
   if &filetype =~ 'nerdtree|tagbar|qf|help'
     return
@@ -25,24 +29,32 @@ endfun
 
 function! s:setupColors()
   " Corrections for solarized theme
-  highlight MatchParen ctermbg=none guibg=red
+  highlight MatchParen
+            \ ctermbg=none
+            \ guibg=red
   if &background == "dark"
-    highlight Cursor                                        guibg=fg
-    highlight CursorLine  ctermbg=233                       guibg=#171717
-    highlight Visual      ctermbg=LightGray                 guibg=#EEE8D5
+    highlight Cursor
+              \ guibg=fg
+    highlight CursorLine
+              \ ctermbg=233
+              \ guibg=#171717
+    highlight Visual
+              \ ctermbg=LightGray
+              \ guifg=#2aa198 guibg=bg
   else
     highlight CursorLine  ctermbg=Gray                      guibg=Gray
     highlight Visual      ctermbg=Yellow                    guibg=Magenta
     highlight VertSplit                                     guibg=DarkGray
   endif
 
-  highlight Cursor                                          guibg=fg
+  highlight Cursor
+            \ guibg=fg
 
-  if !has("gui_running")
-    " 15-th color from palette has to be reserved in iTerm profile and
-    " have color value slightly different from background
-    highlight SpecialKey  ctermbg=None                      ctermfg=15
-  endif
+  " NOTE: 256 color palette: 15-th color from palette has to be reserved in
+  " iTerm profile and have color value slightly different from background
+  highlight SpecialKey
+            \ ctermbg=NONE ctermfg=15
+            \ guibg=bg guifg=#003556
 endfun
 
 function! GetBufferList()
@@ -182,12 +194,22 @@ set list
 set fillchars=fold:·,vert:│
 
 set background=dark
-colorscheme solarized
 "
+if s:is24bitTerm()
+  " enable 24bit colors instead of palettes
+  " NOTE: this requires terminal support (iTerm has such support)
+  set termguicolors
+  colorscheme solarized8_dark
+else
+  colorscheme solarized
+endif
+
 call s:setupColors()
 
 if has('gui_running')
-  set guifont=Fira\ Mona:h14
+  set macthinstrokes " render the text a little lighter
+  set macligatures " display ligatures
+  set guifont=Fira\ Code\ Light:h14
 
   " Unprintable characters mapping
   set listchars=eol:¬,extends:»,precedes:◂,tab:▸\ ,trail:·
@@ -377,7 +399,8 @@ noremap <F10>   :silent! !ctags
 "noremap <F11>   :YcmForceCompileAndDiagnostics<CR>
 
 " Map solarized dark/ligth switch
-noremap <F12>   :call ToggleBackgroundSafely()<CR>
+" FIX: 24bit terminal support
+"noremap <F12>   :call ToggleBackgroundSafely()<CR>
 
 let mapleader = ","
 let maplocalleader = "\\"
