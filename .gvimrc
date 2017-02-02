@@ -294,14 +294,13 @@ sign define dummy_sign
 autocmd BufEnter *
   \ :execute 'sign place 9999 line=1 name=dummy_sign buffer=' . bufnr('')
 
-" NOTE: Temporary disabled because somehow this conflicts with Gentoo default
-" vim scripts
+" NOTE: Somehow this conflicts with Gentoo default vim scripts
 " automatic cleanup trailing spaces and tab for newly created files
-"augroup BufNewFile
-"  autocmd Filetype cpp,ruby,eruby,yaml,javascript,python
-"    \ autocmd BufWritePre <buffer>
-"      \ :execute "normal mz" | %s/\s\+$//e | :execute "normal `z"
-"augroup END
+augroup BufNewFile
+  autocmd Filetype cpp,ruby,eruby,yaml,javascript,python
+    \ autocmd BufWritePre <buffer>
+      \ :execute "normal mz" | %s/\s\+$//e | :execute "normal `z"
+augroup END
 
 " Correct filetype detection
 autocmd BufNewFile,BufReadPre SConstruct*,SConscript* set filetype=python
