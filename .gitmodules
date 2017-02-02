@@ -82,3 +82,18 @@
 [submodule "bundle/vim-localvimrc"]
 	path = bundle/vim-localvimrc
 	url = https://github.com/embear/vim-localvimrc.git
+[submodule "/Users/lostar/.vim/pack/themes/opt/vim-solarized8.git"]
+	path = /Users/lostar/.vim/pack/themes/opt/vim-solarized8.git
+	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "pack/themes/opt/plugins/vim-bracketed-paste.git"]
+	path = pack/themes/opt/plugins/vim-bracketed-paste.git
+	url = https://github.com/ConradIrwin/vim-bracketed-paste.git
+[submodule "pack/plugins/opt/vim-bracketed-paste.git"]
+	path = pack/plugins/opt/vim-bracketed-paste.git
+	url = https://github.com/ConradIrwin/vim-bracketed-paste.git
+[submodule "pack/themes/opt/vim-solarized8.git"]
+	path = pack/themes/opt/vim-solarized8.git
+	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "pack/plugins/opt/colorizer.git"]
+	path = pack/plugins/opt/colorizer.git
+	url = https://github.com/lilydjwg/colorizer.git
