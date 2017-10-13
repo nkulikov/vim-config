@@ -106,6 +106,9 @@ set ignorecase
 set smartcase
 set linebreak
 
+" Enable mouse in normal mode
+set mouse=n
+
 " Setup status line
 set statusline=
 set statusline+=%<%f%h%m%r\ 
