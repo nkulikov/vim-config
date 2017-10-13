@@ -655,116 +655,119 @@ let g:pymode_rope_complete_on_dot = 1
 let g:pymode_lint_error_symbol = '✗✗'
 
 " }}}
-" Setup unite.vim {{{
+" Setup unite.vim (DISABLED) {{{
+" NOTE: E117: Unknown function: unite#filters#matcher_default#use
 
-let g:unite_data_directory='~/.vim/.cache/unite'
-
-" Fuzzy match by default
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-
-" Fuzzy matching for plugins not using matcher_default as filter
-call unite#custom#source('outline,line,grep,session', 'matchers', ['matcher_fuzzy'])
-
-let g:unite_source_rec_max_cache_files = 0
-call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 0)
-
-" Keep track of yanks
-let g:unite_source_history_yank_enable = 1
-
-" Prettier prompt
-call unite#custom#profile('default', 'context', {
-  \ 'prompt': '» ',
-  \ 'start_insert': 1,
-  \ 'marked_icon': '✓',
-  \ 'update_time': 200,
-  \ 'cursor_line_highlight': 'UniteSelectedLine',
-  \ 'direction': 'botright',
-  \ 'prompt_direction': 'top',
-  \ })
-
-" Autosave sessions for unite-sessions
-let g:unite_source_session_enable_auto_save = 1
-
-" Non-ugly colors for selected item, requires you to set 'hi UnitedSelectedLine'
-let g:unite_cursor_line_highlight = "UniteSelectedLine"
-
-" Set to some better time formats
-let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
-let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
-
-" Use ag
-let g:unite_source_file_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-let g:unite_source_rec_async_command =
-  \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts =
-  \'--nocolor --nogroup --hidden --ignore-case'
-let g:unite_source_grep_recursive_opt = ''
-
-let g:unite_source_codesearch_ignore_case = 1
-
-function! g:DoUniteFuzzy()
-    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_rank')
-    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
-    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_fuzzy')
-    exec "Unite -buffer-name=files file_rec/async file/new"
-endfunction
-function! g:DoUniteNonFuzzy()
-    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_nothing')
-    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
-    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_glob')
-    exec "Unite -buffer-name=files file_rec/async file/new"
-endfunction
-function! g:DoUniteFuzzyQuickfix()
-    call unite#custom#source('quickfix', 'sorters', 'sorter_rank')
-    call unite#custom#source('quickfix', 'matchers', 'matcher_fuzzy')
-    exec "Unite -buffer-name=quickfix quickfix"
-endfunction
-function! g:DoUniteNonFuzzyQuickfix()
-    call unite#custom#source('quickfix', 'sorters', 'sorter_nothing')
-    call unite#custom#source('quickfix', 'matchers', 'matcher_glob')
-    exec "Unite -buffer-name=quickfix quickfix"
-endfunction
-function! UltiSnipsCallUnite()
-    Unite -immediately -no-empty -vertical -buffer-name=ultisnips ultisnips
-    return ''
-endfunction
-
-inoremap <silent><leader>l<tab> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent><leader>l<tab> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent><leader>lr :call g:DoUniteFuzzy()<CR>
-nnoremap <silent><leader>lR :call g:DoUniteNonFuzzy()<CR>
-nnoremap <silent><leader>lq :call g:DoUniteFuzzyQuickfix()<CR>
-nnoremap <silent><leader>lQ :call g:DoUniteNonFuzzyQuickfix()<CR>
-nnoremap <silent><leader>le :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
-nnoremap <silent><leader>lE :<C-u>Unite -buffer-name=files file_mru bookmark file_rec/async file/new<CR>
-nnoremap <silent><leader>lB :<C-u>Unite -buffer-name=buffers buffer<CR>
-nnoremap <silent><leader>lb :<C-u>Unite -buffer-name=buffers buffer_tab<CR>
-nnoremap <silent><leader>ly :<C-u>Unite -buffer-name=yanks history/yank<CR>
-nnoremap <silent><leader>lc :<C-u>Unite -buffer-name=changes change<CR>
-nnoremap <silent><leader>lj :<C-u>Unite -buffer-name=jumps jump<CR>
-nnoremap <silent><leader>lf :<C-u>Unite -buffer-name=jumps jump<CR>
-nnoremap <silent><leader>l; :<C-u>Unite -buffer-name=commands history/command<CR>
-nnoremap <silent><leader>l/ :<C-u>Unite -buffer-name=commands history/search<CR>
-nnoremap <silent><leader>lo :<C-u>Unite -buffer-name=outline outline<CR>
-nnoremap <silent><leader>la :<C-u>Unite -buffer-name=outline -vertical outline<CR>
-nnoremap <silent><leader>ll :<C-u>Unite -buffer-name=line line<CR>
-nnoremap <silent><leader>lw :<C-u>Unite -buffer-name=location_list location_list<CR>
-nnoremap <silent><leader>l* :<C-u>UniteWithCursorWord -buffer-name=line line<CR>
-nnoremap <silent><leader>lg :<C-u>Unite -buffer-name=grep grep<CR>
-nnoremap <silent><leader>lG "zyiw:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
-vnoremap <silent><leader>lG "zy:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
-nnoremap <silent><leader>ls :<C-u>Unite session<CR>
-nnoremap <silent><leader>lt :<C-u>Unite -buffer-name=tags tag<CR>
-nnoremap <silent><leader>lT :<C-u>Unite -buffer-name=tagfiles tag/file<CR>
-nnoremap <silent><leader>li :<C-u>Unite -buffer-name=autotags tag/include<CR>
-nnoremap <silent><leader>ld :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru directory<CR>
-nnoremap <silent><leader>l, :<C-u>UniteResume<CR>
-nnoremap <silent><leader>lv :<C-u>UniteResume<CR>
-nnoremap <silent><leader>lV :<C-u>UniteResume
-
-nnoremap <leader>lS :<C-u>UniteSessionSave
+"let g:unite_data_directory='~/.vim/.cache/unite'
+"
+"" Fuzzy match by default
+"
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"
+"" Fuzzy matching for plugins not using matcher_default as filter
+"call unite#custom#source('outline,line,grep,session', 'matchers', ['matcher_fuzzy'])
+"
+"call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep', 'max_candidates', 0)
+"
+"let g:unite_source_rec_max_cache_files = 0
+"
+"" Keep track of yanks
+"let g:unite_source_history_yank_enable = 1
+"
+"" Prettier prompt
+"call unite#custom#profile('default', 'context', {
+"  \ 'prompt': '» ',
+"  \ 'start_insert': 1,
+"  \ 'marked_icon': '✓',
+"  \ 'update_time': 200,
+"  \ 'cursor_line_highlight': 'UniteSelectedLine',
+"  \ 'direction': 'botright',
+"  \ 'prompt_direction': 'top',
+"  \ })
+"
+"" Autosave sessions for unite-sessions
+"let g:unite_source_session_enable_auto_save = 1
+"
+"" Non-ugly colors for selected item, requires you to set 'hi UnitedSelectedLine'
+"let g:unite_cursor_line_highlight = "UniteSelectedLine"
+"
+"" Set to some better time formats
+"let g:unite_source_buffer_time_format = "%Y-%m-%d  %H:%M:%S  "
+"let g:unite_source_file_mru_time_format = "%Y-%m-%d  %H:%M:%S  "
+"
+"" Use ag
+"let g:unite_source_file_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+"let g:unite_source_rec_async_command =
+"  \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+"let g:unite_source_grep_command = 'ag'
+"let g:unite_source_grep_default_opts =
+"  \'--nocolor --nogroup --hidden --ignore-case'
+"let g:unite_source_grep_recursive_opt = ''
+"
+"let g:unite_source_codesearch_ignore_case = 1
+"
+"function! g:DoUniteFuzzy()
+"    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_rank')
+"    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+"    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_fuzzy')
+"    exec "Unite -buffer-name=files file_rec/async file/new"
+"endfunction
+"function! g:DoUniteNonFuzzy()
+"    call unite#custom#source('file_rec/async,file/new', 'sorters', 'sorter_nothing')
+"    call unite#custom#source('file_rec/async,file/new', 'converters', 'converter_relative_word')
+"    call unite#custom#source('file_rec/async,file/new', 'matchers', 'matcher_glob')
+"    exec "Unite -buffer-name=files file_rec/async file/new"
+"endfunction
+"function! g:DoUniteFuzzyQuickfix()
+"    call unite#custom#source('quickfix', 'sorters', 'sorter_rank')
+"    call unite#custom#source('quickfix', 'matchers', 'matcher_fuzzy')
+"    exec "Unite -buffer-name=quickfix quickfix"
+"endfunction
+"function! g:DoUniteNonFuzzyQuickfix()
+"    call unite#custom#source('quickfix', 'sorters', 'sorter_nothing')
+"    call unite#custom#source('quickfix', 'matchers', 'matcher_glob')
+"    exec "Unite -buffer-name=quickfix quickfix"
+"endfunction
+"function! UltiSnipsCallUnite()
+"    Unite -immediately -no-empty -vertical -buffer-name=ultisnips ultisnips
+"    return ''
+"endfunction
+"
+"inoremap <silent><leader>l<tab> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+"nnoremap <silent><leader>l<tab> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+"nnoremap <silent><leader>lr :call g:DoUniteFuzzy()<CR>
+"nnoremap <silent><leader>lR :call g:DoUniteNonFuzzy()<CR>
+"nnoremap <silent><leader>lq :call g:DoUniteFuzzyQuickfix()<CR>
+"nnoremap <silent><leader>lQ :call g:DoUniteNonFuzzyQuickfix()<CR>
+"nnoremap <silent><leader>le :<C-u>Unite -buffer-name=files file_mru bookmark<CR>
+"nnoremap <silent><leader>lE :<C-u>Unite -buffer-name=files file_mru bookmark file_rec/async file/new<CR>
+"nnoremap <silent><leader>lB :<C-u>Unite -buffer-name=buffers buffer<CR>
+"nnoremap <silent><leader>lb :<C-u>Unite -buffer-name=buffers buffer_tab<CR>
+"nnoremap <silent><leader>ly :<C-u>Unite -buffer-name=yanks history/yank<CR>
+"nnoremap <silent><leader>lc :<C-u>Unite -buffer-name=changes change<CR>
+"nnoremap <silent><leader>lj :<C-u>Unite -buffer-name=jumps jump<CR>
+"nnoremap <silent><leader>lf :<C-u>Unite -buffer-name=jumps jump<CR>
+"nnoremap <silent><leader>l; :<C-u>Unite -buffer-name=commands history/command<CR>
+"nnoremap <silent><leader>l/ :<C-u>Unite -buffer-name=commands history/search<CR>
+"nnoremap <silent><leader>lo :<C-u>Unite -buffer-name=outline outline<CR>
+"nnoremap <silent><leader>la :<C-u>Unite -buffer-name=outline -vertical outline<CR>
+"nnoremap <silent><leader>ll :<C-u>Unite -buffer-name=line line<CR>
+"nnoremap <silent><leader>lw :<C-u>Unite -buffer-name=location_list location_list<CR>
+"nnoremap <silent><leader>l* :<C-u>UniteWithCursorWord -buffer-name=line line<CR>
+"nnoremap <silent><leader>lg :<C-u>Unite -buffer-name=grep grep<CR>
+"nnoremap <silent><leader>lG "zyiw:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+"vnoremap <silent><leader>lG "zy:<C-u>Unite -buffer-name=grepword grep<CR><CR><C-R>z<CR>
+"nnoremap <silent><leader>ls :<C-u>Unite session<CR>
+"nnoremap <silent><leader>lt :<C-u>Unite -buffer-name=tags tag<CR>
+"nnoremap <silent><leader>lT :<C-u>Unite -buffer-name=tagfiles tag/file<CR>
+"nnoremap <silent><leader>li :<C-u>Unite -buffer-name=autotags tag/include<CR>
+"nnoremap <silent><leader>ld :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru directory<CR>
+"nnoremap <silent><leader>l, :<C-u>UniteResume<CR>
+"nnoremap <silent><leader>lv :<C-u>UniteResume<CR>
+"nnoremap <silent><leader>lV :<C-u>UniteResume
+"
+"nnoremap <leader>lS :<C-u>UniteSessionSave
 
 " }}}
 " Setup vitality {{{
