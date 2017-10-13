@@ -97,6 +97,6 @@
 [submodule "pack/plugins/opt/vim-localvimrc"]
 	path = pack/plugins/opt/vim-localvimrc
 	url = https://github.com/embear/vim-localvimrc.git
-[submodule "pack/plugins/opt/vim-solarized8"]
-	path = pack/plugins/opt/vim-solarized8
+[submodule "pack/themes/opt/vim-solarized8"]
+	path = pack/themes/opt/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
