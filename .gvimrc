@@ -86,10 +86,6 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-" Setup pathogen plugin
-"runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
 syntax on
 filetype on
 
@@ -248,7 +244,7 @@ endif
 set sidescroll=1
 
 " Line continuation markers used when wrap is off
-set listchars+=precedes:◀,extends:►
+"set listchars-=precedes:◀,extends:►
 
 " Set scons as build tool
 set makeprg=scons
@@ -286,6 +282,10 @@ set completeopt=menu,menuone,longest,preview
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
+" upward search for ctags
+" help file-searching
+set tags=./tags;,tags;
+
 " }}}
 
 " Autocommands. {{{
@@ -312,11 +312,14 @@ autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 " treat new file with unspecified type as plain text
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
-" plain text formatting
-" (a) autoformating of paragraphs and (w) trailing whitespace for paragraph
-" continuation on next line
-autocmd FileType text
-  \ setlocal formatoptions+=aw
+" formatoptions:
+" (a) autoformatting of paragraphs
+" (w) trailing whitespace for paragraph continuation on next line
+" (t) auto-wrap text using `textwidth`
+" (l) long lines are not broken in insert mode
+autocmd FileType text,markdown
+  \ setlocal formatoptions+=awt formatoptions-=l
+  \ textwidth=80
 
 autocmd FileType ruby,python,php
   \ setlocal expandtab shiftwidth=4 softtabstop=4 nowrap
@@ -332,6 +335,9 @@ autocmd BufNewFile,BufReadPre .vimrc,.gvimrc
 autocmd FileType cpp
   \ setlocal expandtab shiftwidth=4 softtabstop=0 tabstop=4 nowrap
   \ cindent cinoptions=(1s,u1s,U0,l1,g1,h-1 matchpairs=(:),{:},[:],<:>
+autocmd FileType c
+  \ setlocal nowrap
+  \ cindent
 autocmd FileType sh,vim,snippets
   \ setlocal noexpandtab tabstop=8 nowrap
 
@@ -340,7 +346,7 @@ autocmd BufNewFile,BufReadPre,BufNew * call s:enableSpellChecker()
 autocmd FileType help setlocal nospell
 
 " Highlighting trailing columns in lines longer than 80 columns.
-autocmd FileType cpp,ruby,eruby,python,yaml,javascript,sh,gitcommit
+autocmd FileType c,cpp,ruby,eruby,python,yaml,javascript,sh,gitcommit
   \ set colorcolumn=80
 autocmd BufNewFile,BufReadPre .vimrc,gvimrc
   \ set colorcolumn=80
