@@ -652,6 +652,9 @@ endif
 " }}}
 " Setup python-mode. {{{
 
+"" disable rope because it hang vim on file write
+let g:pymode_rope = 0
+
 let g:pymode_virtualenv = 1
 let g:pymode_folding = 0
 let g:pymode_rope_complete_on_dot = 1
