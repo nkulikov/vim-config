@@ -211,7 +211,7 @@ if has('gui_running')
   set guifont=Fira\ Code\ Light:h14
 
   " Unprintable characters mapping
-  set listchars=eol:¬,extends:»,precedes:◂,tab:▸\ ,trail:·
+  set listchars=eol:¬,tab:▸\ ,trail:·
 
   " Remove toolbar
   set guioptions-=T
@@ -225,7 +225,7 @@ if has('gui_running')
   set guioptions-=L
 else " console UI settings
   " Unprintable characters mapping
-  set listchars=eol:↩,extends:»,precedes:◂,tab:⇥\ ,trail:·
+  set listchars=eol:↩,tab:⇥\ ,trail:·
 
   " Enable 256 colors
   set t_Co=256
