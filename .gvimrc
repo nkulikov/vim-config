@@ -207,7 +207,7 @@ call s:setupColors()
 
 if has('gui_running')
   set macthinstrokes " render the text a little lighter
-  set macligatures " display ligatures
+  "set macligatures " display ligatures
   set guifont=Fira\ Code\ Light:h14
 
   " Unprintable characters mapping
