@@ -198,7 +198,7 @@ if s:is24bitTerm()
   " enable 24bit colors instead of palettes
   " NOTE: this requires terminal support (iTerm has such support)
   set termguicolors
-  colorscheme solarized8_dark
+  colorscheme solarized8
 else
   colorscheme solarized
 endif
