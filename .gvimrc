@@ -320,9 +320,11 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 " (w) trailing whitespace for paragraph continuation on next line
 " (t) auto-wrap text using `textwidth`
 " (l) long lines are not broken in insert mode
-autocmd FileType text,markdown
-  \ setlocal formatoptions+=awt formatoptions-=l
-  \ textwidth=80
+" TODO: a lot of text do not require such formatting, so this is disabled
+" until more strict matching filter will be found
+"autocmd FileType text,markdown
+"  \ setlocal formatoptions+=awt formatoptions-=l
+"  \ textwidth=80
 
 autocmd FileType ruby,python,php
   \ setlocal expandtab shiftwidth=4 softtabstop=4 nowrap
