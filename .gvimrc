@@ -799,6 +799,12 @@ function! XTermPasteBegin()
   return ""
 endfunction
 " }}}
+" Setup filebeagle {{{
+
+" show hidden files by default
+let g:filebeagle_show_hidden = 1
+
+" }}}
 
 "set foldmethod=syntax
 "set foldlevelstart=1
