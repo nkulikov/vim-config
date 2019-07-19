@@ -109,3 +109,6 @@
 [submodule "pack/plugins/opt/qmake-syntax-vim"]
 	path = pack/plugins/opt/qmake-syntax-vim
 	url = https://github.com/artoj/qmake-syntax-vim.git
+[submodule "pack/plugins/opt/ctrlp.vim"]
+	path = pack/plugins/opt/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
