@@ -109,6 +109,3 @@
 [submodule "pack/plugins/opt/qmake-syntax-vim"]
 	path = pack/plugins/opt/qmake-syntax-vim
 	url = https://github.com/artoj/qmake-syntax-vim.git
-[submodule "pack/plugins/opt/fzf.vim"]
-	path = pack/plugins/opt/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
