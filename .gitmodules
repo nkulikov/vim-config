@@ -100,3 +100,15 @@
 [submodule "pack/themes/opt/vim-solarized8"]
 	path = pack/themes/opt/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "pack/plugins/opt/info.vim"]
+	path = pack/plugins/opt/info.vim
+	url = https://gitlab.com/HiPhish/info.vim.git
+[submodule "pack/plugins/opt/vim-man"]
+	path = pack/plugins/opt/vim-man
+	url = https://github.com/vim-utils/vim-man.git
+[submodule "pack/plugins/opt/qmake-syntax-vim"]
+	path = pack/plugins/opt/qmake-syntax-vim
+	url = https://github.com/artoj/qmake-syntax-vim.git
+[submodule "pack/plugins/opt/fzf.vim"]
+	path = pack/plugins/opt/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
