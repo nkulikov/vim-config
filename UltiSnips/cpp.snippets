@@ -1,4 +1,4 @@
-snippet guard "Include header once only guard"
+snippet _guard "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
 	import random, string
@@ -11,11 +11,10 @@ else:
 
 ${0}
 
-#endif /* end of include guard: $1 */
-
+#endif /* $1 */
 endsnippet
 
-snippet header "Generic header" !b
+snippet _headerold "Generic header with ifdef guards" !b
 /********************************************************************
 *   Project     ${1:Project}
 *   Copyright:
@@ -27,63 +26,35 @@ snippet header "Generic header" !b
 #endif // _$2_H_
 endsnippet
 
-snippet headerbroadway "Broadway 3D Artec C/C++ header" !b
+snippet _header "Generic header" !b
 /********************************************************************
-*   Project     Broadway 3D
-*   Copyright:  Artec Inc.
+*   Project     ${1:Project}
+*   Copyright:
 ********************************************************************/
 
-#ifndef _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
-#define _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
-
-namespace Artec
-{
-namespace BroadwaySoftware
-{
-namespace ${1:ModuleName}
-{
-
-
-
-} // $1
-} // BroadwaySoftware
-} // Artec
-
-#endif // _ARTEC_BROADWAYSOFWARE_`!p snip.rv = t[1].upper()`_`!v toupper(expand("%:t:r"))`_H_
+#pragma once
 endsnippet
 
-snippet cldec "Generic Artec class declaration" !b
+snippet _class "Generic class declaration" !b
 // requires:
 //#include <stdexcept>
-//#include <boost/scoped_ptr.hpp>
+//#include <memory>
 
-class ${1:ClassName}
+class ${1:class_name}
 {
  public:
 
-	/// Base error class. Should not be directly used for
-	/// signaling an error. This class proposed for inheritance.
-	struct BaseError : std::runtime_error
-	{
-		BaseError(std::string const & m) throw () :
-			runtime_error(m)
-		{ }
-	};
-
-
+	struct an_error : std::runtime_error
+	{ an_error(std::string const & m) noexcept : runtime_error(m) { } };
 
  private:
 
-	struct Impl;
-	boost::scoped_ptr<Impl> impl;
+	struct impl;
+	std::unique_ptr<impl> pimpl;
 };
 endsnippet
 
-snippet errdecl "Generic Artec class error declaration" !
-struct ${1:New}Error : BaseError
-{
-	$1Error(std::string const & m) :
-		BaseError(m)
-	{ }
-};
+snippet _error "Generic error declaration" !
+struct ${1:new}_error : an_error
+{ $1_error(std::string const & m) noexcept : an_error(m) { } };
 endsnippet
