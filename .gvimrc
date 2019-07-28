@@ -805,6 +805,13 @@ endfunction
 let g:filebeagle_show_hidden = 1
 
 " }}}
+" Setup Termdebug {{{
+" use: :Termdebug program
+packadd termdebug
+
+"always use vertical split
+let g:termdebug_wide = 1
+" }}}
 
 "set foldmethod=syntax
 "set foldlevelstart=1
