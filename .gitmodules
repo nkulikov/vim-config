@@ -112,3 +112,6 @@
 [submodule "pack/plugins/opt/ctrlp.vim"]
 	path = pack/plugins/opt/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
+[submodule "pack/plugins/opt/indentLine"]
+	path = pack/plugins/opt/indentLine
+	url = https://github.com/Yggdroot/indentLine.git
