@@ -810,11 +810,29 @@ let g:filebeagle_show_hidden = 1
 
 " }}}
 " Setup Termdebug {{{
+
 " use: :Termdebug program
 packadd termdebug
 
 "always use vertical split
 let g:termdebug_wide = 1
+
+" }}}
+" Setup ALE {{{
+
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\ 'markdown': ['proselint', 'vale'],
+\ 'python': ['flake8'],
+\ 'sh': ['shellcheck'],
+\ 'json': ['jsonlint'],
+\}
+let g:ale_fixers = {
+\ 'c': ['clang-format'],
+\ 'cpp': ['clang-format'],
+\ 'python': ['black'],
+\ 'json': ['jq'],
+\}
 " }}}
 
 "set foldmethod=syntax
