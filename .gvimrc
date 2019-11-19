@@ -833,6 +833,11 @@ let g:ale_fixers = {
 \ 'python': ['black'],
 \ 'json': ['jq'],
 \}
+
+" }}}
+" Setup vim-cpp-modern {{{
+" workaround for flagging braces inside brackets as invalid syntax
+let c_no_curly_error = 1
 " }}}
 
 "set foldmethod=syntax
