@@ -115,3 +115,15 @@
 [submodule "pack/plugins/opt/indentLine"]
 	path = pack/plugins/opt/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
+[submodule "pack/plugins/opt/ale"]
+	path = pack/plugins/opt/ale
+	url = https://github.com/w0rp/ale.git
+[submodule "pack/plugins/opt/vim-cpp-modern"]
+	path = pack/plugins/opt/vim-cpp-modern
+	url = https://github.com/bfrg/vim-cpp-modern.git
+[submodule "pack/plugins/opt/youcompleteme"]
+	path = pack/plugins/opt/youcompleteme
+	url = https://github.com/ycm-core/YouCompleteMe.git
+[submodule "pack/plugins/opt/vim-rtags"]
+	path = pack/plugins/opt/vim-rtags
+	url = https://github.com/lyuts/vim-rtags.git

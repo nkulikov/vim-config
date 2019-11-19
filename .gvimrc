@@ -252,6 +252,9 @@ set sidescroll=1
 " Set scons as build tool
 set makeprg=scons
 
+" By default consider .sh as POSIX (instead of Bourne) script
+let g:is_posix=1
+
 " Number of lines to scroll with CTRL-U and CTRL-D commands.
 set scroll=5
 
