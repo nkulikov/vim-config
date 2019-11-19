@@ -316,7 +316,8 @@ autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 " Text formatting
 
 " treat new file with unspecified type as plain text
-autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+" DISABLED: because in most cases it is too annoying
+"autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
 " formatoptions:
 " (a) autoformatting of paragraphs
