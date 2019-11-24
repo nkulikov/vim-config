@@ -349,6 +349,8 @@ autocmd FileType c
   \ cindent
 autocmd FileType sh,vim,snippets
   \ setlocal noexpandtab tabstop=8 nowrap
+autocmd FileType make
+  \ setlocal nowrap
 
 " Enable spell checker everywhere except help
 autocmd BufNewFile,BufReadPre,BufNew * call s:enableSpellChecker()
