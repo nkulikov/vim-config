@@ -347,6 +347,8 @@ autocmd FileType cpp
 autocmd FileType c
   \ setlocal nowrap
   \ cindent
+autocmd FileType cmake
+  \ setlocal expandtab shiftwidth=2 softtabstop=0 tabstop=4 nowrap
 autocmd FileType sh,vim,snippets
   \ setlocal noexpandtab tabstop=8 nowrap
 autocmd FileType make
