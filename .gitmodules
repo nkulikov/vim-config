@@ -126,4 +126,4 @@
 	url = https://github.com/ycm-core/YouCompleteMe.git
 [submodule "pack/plugins/opt/vim-rtags"]
 	path = pack/plugins/opt/vim-rtags
-	url = https://github.com/lyuts/vim-rtags.git
+	url = https://github.com/mckellyln/vim-rtags.git
