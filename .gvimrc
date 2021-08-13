@@ -854,6 +854,9 @@ function! GitStatus()
 endfunction
 
 " }}}
+" Setup indentLine {{{
+let g:indentLine_char_list = ['¦', '⠅']
+" }}}
 
 "set foldmethod=syntax
 "set foldlevelstart=1
