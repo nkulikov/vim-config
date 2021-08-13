@@ -114,9 +114,9 @@ set statusline=
 set statusline+=%<%f%h%m%r\ 
 set statusline+=[%{strlen(&ft)?&ft:'none'},
 set statusline+=%{strlen(&fenc)?&fenc:&enc},
-set statusline+=%{&fileformat}]%=
-"set statusline+=%{SyntasticStatuslineFlag()}\ 
-set statusline+=⍖\ %l/%L,\ ⍆\ %c,\ '0x%04B'\ 
+set statusline+=%{&fileformat}]\ %=
+set statusline+=↓%l/%L\ →%c\ '0x%04B'
+set statusline+=%{GitStatus()}\ 
 
 " Setup cursor style
 set guicursor+=a:blinkon0
@@ -842,6 +842,17 @@ let g:ale_fixers = {
 " Setup vim-cpp-modern {{{
 " workaround for flagging braces inside brackets as invalid syntax
 let c_no_curly_error = 1
+" }}}
+" Setup vim-gitgutter {{{
+" disable all plugin mappings
+let g:gitgutter_map_keys = 0
+
+" used for statusline
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf(' +%d ~%d -%d', a, m, r)
+endfunction
+
 " }}}
 
 "set foldmethod=syntax
