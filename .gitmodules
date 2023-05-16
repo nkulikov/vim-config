@@ -127,3 +127,6 @@
 [submodule "pack/plugins/opt/vim-rtags"]
 	path = pack/plugins/opt/vim-rtags
 	url = https://github.com/mckellyln/vim-rtags.git
+[submodule "pack/plugins/opt/vim-bitbake"]
+	path = pack/plugins/opt/vim-bitbake
+	url = https://github.com/kergoth/vim-bitbake.git
