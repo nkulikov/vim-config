@@ -81,7 +81,7 @@
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "pack/plugins/opt/vim-json"]
 	path = pack/plugins/opt/vim-json
-	url = https://github.com/jakar/vim-json.git
+	url = https://github.com/elzr/vim-json.git
 [submodule "pack/plugins/opt/vim-mikrotik"]
 	path = pack/plugins/opt/vim-mikrotik
 	url = https://github.com/zainin/vim-mikrotik.git
