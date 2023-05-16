@@ -9,7 +9,7 @@ function! s:isMac()
 endfunction
 
 function! s:is24bitTerm()
-  return $TERM_PROGRAM == 'iTerm.app'
+  return ($LC_TERMINAL == 'iTerm2') || ($TERM_PROGRAM == 'iTerm.app')
 endfunction
 
 function! s:enableSpellChecker()
@@ -197,6 +197,8 @@ set background=dark
 if s:is24bitTerm()
   " enable 24bit colors instead of palettes
   " NOTE: this requires terminal support (iTerm has such support)
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
   colorscheme solarized8
 else
