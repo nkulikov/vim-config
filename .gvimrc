@@ -9,7 +9,7 @@ function! s:isMac()
 endfunction
 
 function! s:is24bitTerm()
-  return ($LC_TERMINAL == 'iTerm2') || ($TERM_PROGRAM == 'iTerm.app')
+  return ($COLORTERM == 'truecolor')
 endfunction
 
 function! s:enableSpellChecker()
